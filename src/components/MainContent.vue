@@ -1,0 +1,60 @@
+<template>
+<div class="container">
+  <div>
+    <customer></customer>
+  </div>
+  <product-detail v-if="showProductDetail" :parentvariable="parentvariable"></product-detail>
+  <template v-else>
+    <Suspense v-if="textSearch">
+      <search-result @detailProduct="updateparent" :searchText="textSearch"></search-result>
+    </Suspense>
+  </template>
+</div>
+</template>
+
+<script>
+import axios from 'axios'
+import { useStore } from 'vuex'
+import { ref } from '@vue/reactivity'
+import SearchResult from './maincontents/SearchResult.vue'
+import ProductDetail from './maincontents/ProductDetail.vue'
+import Customer from './maincontents/Customer.vue'
+
+export default {
+  components: { SearchResult, ProductDetail, Customer },
+  setup () {
+    const productDetail = ref()
+    const baseUrl = 'https://startpwa.com/'
+    const api = `${baseUrl}rest/V1/products?searchCriteria[filter_groups][0][filters][0][field]=name&searchCriteria[filter_groups][0][filters][0][value]=%25Watch%25&searchCriteria[filter_groups][0][filters][0][condition_type]=like`
+    axios.get(api).then(response => {
+      productDetail.value = response.data.children_data
+    })
+    return {
+    }
+  },
+  data () {
+    const store = useStore()
+    return {
+      store,
+      parentvariable: null
+    }
+  },
+  methods: {
+    updateparent (variable) {
+      this.store.commit('setShowProductDetail', true)
+      this.parentvariable = variable
+    }
+  },
+  computed: {
+    textSearch () {
+      return this.$store.state.textSearch
+    },
+    categoryId () {
+      return this.$store.state.category
+    },
+    showProductDetail () {
+      return this.$store.state.showProductDetail
+    }
+  }
+}
+</script>
