@@ -1,14 +1,12 @@
 <template>
 <div class="container">
-  <div>
+  <Suspense v-if="pageType === 'customer'">
     <customer></customer>
-  </div>
+  </Suspense>
   <product-detail v-if="showProductDetail" :parentvariable="parentvariable"></product-detail>
-  <template v-else>
-    <Suspense v-if="textSearch">
-      <search-result @detailProduct="updateparent" :searchText="textSearch"></search-result>
-    </Suspense>
-  </template>
+  <Suspense v-else-if="pageType === 'search-criteria'">
+    <search-result @detailProduct="updateparent" :searchText="textSearch"></search-result>
+  </Suspense>
 </div>
 </template>
 
@@ -16,6 +14,7 @@
 import axios from 'axios'
 import { useStore } from 'vuex'
 import { ref } from '@vue/reactivity'
+import { useRoute } from 'vue-router'
 import SearchResult from './maincontents/SearchResult.vue'
 import ProductDetail from './maincontents/ProductDetail.vue'
 import Customer from './maincontents/Customer.vue'
@@ -23,6 +22,10 @@ import Customer from './maincontents/Customer.vue'
 export default {
   components: { SearchResult, ProductDetail, Customer },
   setup () {
+    const pageType = ref('')
+    const route = useRoute()
+    pageType.value = route.query.pageType
+    console.log(pageType.value)
     const productDetail = ref()
     const baseUrl = 'https://startpwa.com/'
     const api = `${baseUrl}rest/V1/products?searchCriteria[filter_groups][0][filters][0][field]=name&searchCriteria[filter_groups][0][filters][0][value]=%25Watch%25&searchCriteria[filter_groups][0][filters][0][condition_type]=like`
@@ -30,6 +33,7 @@ export default {
       productDetail.value = response.data.children_data
     })
     return {
+      pageType
     }
   },
   data () {
@@ -54,6 +58,11 @@ export default {
     },
     showProductDetail () {
       return this.$store.state.showProductDetail
+    }
+  },
+  watch: {
+    $route (to, from) {
+      this.pageType = to.query.pageType
     }
   }
 }

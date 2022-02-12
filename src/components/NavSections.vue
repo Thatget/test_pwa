@@ -13,8 +13,7 @@
               </div>
             </template>
             <div v-else>
-              <router-link :to="{ name: 'Home', query: { categoryId: categories.id }}">{{ categories.name }}</router-link>
-              <!-- <a style="cursor: pointer;" @click="choseCategory(categories.id)">{{ categories.name }}</a> -->
+              <router-link :to="{ name: 'Home', query: { pageType: 'search-criteria', categoryId: categories.id }}">{{ categories.name }}</router-link>
             </div>
           </template>
         </li>
