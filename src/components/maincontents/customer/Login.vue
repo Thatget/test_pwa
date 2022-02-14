@@ -22,7 +22,7 @@
                             <input type="checkbox" name="" id="" style="margin: 2px 5px 0 0;">
                             <label>Show Password</label>
                         </div>
-                        <button class="btn btn-primary">Sign In</button>
+                        <button @click="logIn" class="btn btn-primary">Sign In</button>
                         <a style="margin-left: 15px;" class="action remind" href="https://startpwa.com/index.php/customer/account/forgotpassword/"><span>Forgot Your Password?</span></a>
                     </div>
                 </div>
@@ -54,9 +54,12 @@ export default {
         console.log(response.data)
         token.value = response.data
       })
+        .catch(error => {
+          console.log(error.response.data)
+        })
     }
     return {
-      logIn
+      email, password, logIn
     }
   }
 }
