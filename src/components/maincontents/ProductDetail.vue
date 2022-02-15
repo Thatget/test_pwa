@@ -19,11 +19,14 @@
 
 <script>
 import { ref } from '@vue/reactivity'
+import { useStore } from 'vuex'
 export default {
   props: {
     parentvariable: Object
   },
   setup (props) {
+    const store = useStore()
+    console.log(store.state)
     const baseUrl = 'https://startpwa.com/'
     const shortDescription = ref('')
     const x = ref(props)

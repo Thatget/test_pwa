@@ -40,22 +40,25 @@
 
 <script>
 import axios from 'axios'
+import { useStore } from 'vuex'
+import { useCookies } from 'vue3-cookies'
 import { ref } from '@vue/reactivity'
 export default {
   async setup () {
-    const baseUrl = 'http://local0m243.com/'
-    const token = ref('')
+    const store = useStore()
+    const { cookies } = useCookies()
+    const baseUrl = 'https://startpwa.com/'
     const email = ref('')
     const password = ref('')
-
-    const logIn = () => {
+    const logIn = async () => {
       const api = `${baseUrl}/rest/V1/integration/customer/token?username=${email.value}&password=${password.value}`
-      axios.post(api).then(response => {
-        console.log(response.data)
-        token.value = response.data
+      await axios.post(api).then(async (response) => {
+        // await store.commit('SET_CUSTOMER_TOKEN', token.value)
+        cookies.set('customer_token', response.data, '5m')
       })
         .catch(error => {
-          console.log(error.response.data)
+          store.commit('setError', error.response.data)
+          console.log(error.response.data.message)
         })
     }
     return {

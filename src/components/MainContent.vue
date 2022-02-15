@@ -58,6 +58,9 @@ export default {
     },
     showProductDetail () {
       return this.$store.state.showProductDetail
+    },
+    errorMessage () {
+      return this.$store.state.error
     }
   },
   watch: {
