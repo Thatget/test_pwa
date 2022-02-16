@@ -20,7 +20,7 @@
         <span class="not-logged-in" data-bind="html: 'Default welcome msg!'">Default welcome msg!</span>
     </li>
     <li class="p-2">
-        <a href="#">Sign In</a>
+        <router-link :to="{ name: 'Home', query: { pageType: 'customer' }}">Sign In</router-link>
     </li>
     <li class="p-2">
         <a href="#">Create an Account</a>

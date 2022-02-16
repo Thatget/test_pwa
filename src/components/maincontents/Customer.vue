@@ -1,26 +1,14 @@
 <template>
-  <h2>ss</h2>
+  <login></login>
 </template>
 
 <script>
-import axios from 'axios'
+import Login from './customer/Login.vue'
 export default {
-  setup () {
-    const baseUrl = 'https://startpwa.com/'
-    const userData = {
-      username: 'roni_cost@example.com',
-      password: 'roni_cost3@example.com'
-    }
-    const api = `${baseUrl}index.php/rest/V1/integration/customer/token`
-    axios.post(api, userData).then(response => {
-      console.log(response.data)
-    })
+  components: { Login },
+  async setup () {
     return {
     }
   }
 }
 </script>
-
-<style>
-
-</style>
