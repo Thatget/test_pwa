@@ -49,6 +49,7 @@
 
 <script>
 import axios from 'axios'
+import { useRoute } from 'vue-router'
 import { ref } from '@vue/reactivity'
 export default {
   props: {
@@ -56,21 +57,34 @@ export default {
   },
   async setup (props) {
     const produtList = ref()
+    const route = useRoute()
     const currentProductList = ref()
     const page = ref()
     const baseUrl = 'https://startpwa.com/'
+
+    const searchQuery = ref()
+    searchQuery.value = route.query
+
+    if (searchQuery.value.textSearch) {
+      console.log('xx')
+    }
+
     const getSearchResult = async (searchText) => {
       const api = `${baseUrl}rest/V1/products?searchCriteria[filter_groups][0][filters][0][field]=name&searchCriteria[filter_groups][0][filters][0][value]=%25${searchText}%25&searchCriteria[filter_groups][0][filters][0][condition_type]=like`
       await axios.get(api).then(response => {
         produtList.value = response.data
       })
     }
+
     await getSearchResult(props.searchText)
+
     const paginate = (pageSize, pageNumber) => {
       page.value = Math.ceil((produtList.value.items.length) / 4)
       currentProductList.value = (produtList.value.items).slice((pageNumber - 1) * pageSize, pageNumber * pageSize)
     }
+
     paginate(8, 1)
+
     return { baseUrl, produtList, getSearchResult, paginate, currentProductList, page }
   },
   methods: {

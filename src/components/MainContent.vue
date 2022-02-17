@@ -3,10 +3,13 @@
   <Suspense v-if="pageType === 'customer'">
     <customer></customer>
   </Suspense>
-  <product-detail v-if="showProductDetail" :parentvariable="parentvariable"></product-detail>
+  <product-detail v-else-if="pageType === 'product-detail'"></product-detail>
   <Suspense v-else-if="pageType === 'search-criteria'">
-    <search-result @detailProduct="updateparent" :searchText="textSearch"></search-result>
+    <search-result></search-result>
   </Suspense>
+  <div v-else>
+    HomePage
+  </div>
 </div>
 </template>
 
@@ -39,26 +42,10 @@ export default {
   data () {
     const store = useStore()
     return {
-      store,
-      parentvariable: null
-    }
-  },
-  methods: {
-    updateparent (variable) {
-      this.store.commit('setShowProductDetail', true)
-      this.parentvariable = variable
+      store
     }
   },
   computed: {
-    textSearch () {
-      return this.$store.state.textSearch
-    },
-    categoryId () {
-      return this.$store.state.category
-    },
-    showProductDetail () {
-      return this.$store.state.showProductDetail
-    },
     errorMessage () {
       return this.$store.state.error
     }
