@@ -1,19 +1,22 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <nav class="navbar navbar-expand-sm navbar-light bg-light container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" v-for="categories in showedNav" :key="categories.id">
           <template v-if="categories.is_active">
             <template v-if="categories.children_data.length">
               <div class="dropdown">
-                <a @click="choseCategory(categories.id)" style="color: inherit;cursor: pointer;text-decoration: none;" class="dropbtn">{{ categories.name }}</a>
+                <router-link :to="{ name: 'Home', query: { pageType: 'search-criteria', categoryId: categories.id }}" class="nav-link">{{ categories.name }}</router-link>
                 <div class="dropdown-content">
-                  <a v-for="subCategory in categories.children_data" @click="choseCategory(subCategory.id)" :key="subCategory.id" href="#">{{ subCategory.name }}</a>
+                  <router-link v-for="subCategory in categories.children_data" :key="subCategory.id" :to="{ name: 'Home', query: { pageType: 'search-criteria', categoryId: subCategory.id }}">{{ subCategory.name }}</router-link>
                 </div>
               </div>
             </template>
             <div v-else>
-              <router-link :to="{ name: 'Home', query: { pageType: 'search-criteria', categoryId: categories.id }}">{{ categories.name }}</router-link>
+              <router-link :to="{ name: 'Home', query: { pageType: 'search-criteria', categoryId: categories.id }}" class="nav-link">{{ categories.name }}</router-link>
             </div>
           </template>
         </li>
@@ -47,11 +50,6 @@ export default {
 </script>
 
 <style scoped>
-.dropbtn {
-  padding: 16px;
-  font-size: 16px;
-  border: none;
-}
 
 .dropdown {
   position: relative;
