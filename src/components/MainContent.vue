@@ -1,5 +1,5 @@
 <template>
-<div class="container">
+<div class="container p-4">
   <Suspense v-if="pageType === 'customer'">
     <customer></customer>
   </Suspense>
