@@ -64,7 +64,7 @@ export default {
 
     const Search = () => {
       if (textSearch.value) {
-        router.replace({ query: { pageType: 'search-criteria', searchText: textSearch.value } })
+        router.replace({ query: { pageType: 'search-criteria', searchText: textSearch.value, searchType: 'name' } })
         textSearch.value = ''
       }
     }

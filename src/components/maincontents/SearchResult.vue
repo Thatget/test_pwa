@@ -65,18 +65,20 @@ export default {
     const searchQuery = ref()
     searchQuery.value = route.query
 
-    if (searchQuery.value.textSearch) {
-      console.log('xx')
-    }
-
     const getSearchResult = async (searchText) => {
-      const api = `${baseUrl}rest/V1/products?searchCriteria[filter_groups][0][filters][0][field]=name&searchCriteria[filter_groups][0][filters][0][value]=%25${searchText}%25&searchCriteria[filter_groups][0][filters][0][condition_type]=like`
+      var api = ''
+      if (searchQuery.value.searchType === 'name') {
+        api = `${baseUrl}rest/V1/products?searchCriteria[filter_groups][0][filters][0][field]=name&searchCriteria[filter_groups][0][filters][0][value]=%25${searchText}%25&searchCriteria[filter_groups][0][filters][0][condition_type]=like`
+      } else {
+        api = `${baseUrl}rest/V1/products?searchCriteria[filter_groups][0][filters][0][field]=category_id&searchCriteria[filter_groups][0][filters][0][value]=${searchText}`
+      }
       await axios.get(api).then(response => {
         produtList.value = response.data
+        console.log(response.data)
       })
     }
 
-    await getSearchResult(props.searchText)
+    await getSearchResult(searchQuery.value.searchText)
 
     const paginate = (pageSize, pageNumber) => {
       page.value = Math.ceil((produtList.value.items.length) / 4)
@@ -85,7 +87,7 @@ export default {
 
     paginate(8, 1)
 
-    return { baseUrl, produtList, getSearchResult, paginate, currentProductList, page }
+    return { baseUrl, produtList, getSearchResult, paginate, currentProductList, page, searchQuery }
   },
   methods: {
     toDetailPage (productId) {
@@ -97,8 +99,9 @@ export default {
     }
   },
   watch: {
-    searchText: async function (newVal) {
-      await this.getSearchResult(newVal)
+    $route  (to, from) {
+      this.searchQuery = to.query
+      this.getSearchResult(to.query)
       this.paginate(8, 1)
     }
   }
