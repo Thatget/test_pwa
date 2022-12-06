@@ -1,24 +1,11 @@
-import { createStore } from 'vuex'
+import { createStore } from "vuex";
+import { auth } from "./modules/auth";
+import { data } from "./modules/data";
 
-export default createStore({
-  state: {
-    textSearch: '',
-    category: '',
-    showProductDetail: false
-  },
-  mutations: {
-    setTextSearch (state, text) {
-      state.textSearch = text
-    },
-    setCategoryId (state, text) {
-      state.category = text
-    },
-    setShowProductDetail (state, text) {
-      state.showProductDetail = text
-    }
-  },
-  actions: {
-  },
+const store = createStore({
   modules: {
-  }
-})
+    auth,
+    data
+  },
+});
+export default store;

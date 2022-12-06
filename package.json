@@ -1,36 +1,57 @@
 {
-  "name": "pwa_app",
+  "name": "vue-3-crud",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "i18n:report": "vue-cli-service i18n:report --src \"./src/**/*.?(js|vue)\" --locales \"./src/locales/**/*.json\""
   },
   "dependencies": {
-    "axios": "^0.25.0",
-    "bootstrap-vue": "^2.21.2",
+    "@meforma/vue-toaster": "^1.3.0",
+    "@popperjs/core": "^2.11.4",
+    "@ring-ui-vue/icons-vue": "^0.0.1",
+    "@shopify/app-bridge": "^3.2.0",
+    "@shopify/app-bridge-utils": "^3.2.0",
+    "@shopify/polaris": "latest",
+    "@shopify/polaris-icons": "latest",
+    "@tinymce/tinymce-vue": "^4.0.6",
+    "axios": "^0.26.0",
+    "bootstrap": "^5.1.3",
+    "bootstrap-icons-vue": "^1.8.1",
     "core-js": "^3.6.5",
+    "gsap": "^3.11.3",
+    "jquery": "^3.6.0",
+    "js-file-download": "^0.4.12",
+    "localtunnel": "^2.0.2",
+    "popper.js": "^1.16.1",
+    "router": "^1.3.6",
+    "sweetalert": "^2.1.2",
+    "tinymce": "^5.10.3",
+    "vee-validate": "^4.5.10",
     "vue": "^3.0.0",
-    "vue-axios": "^3.4.0",
-    "vue-router": "^4.0.0-0",
-    "vuex": "^4.0.0-0"
+    "vue-color": "^2.8.1",
+    "vue-csv-import": "^4.1.2",
+    "vue-debounce": "^4.0.0",
+    "vue-draggable-next": "^2.1.1",
+    "vue-i18n": "^9.1.9",
+    "vue-router": "^4.0.12",
+    "vue-star-rating": "^2.1.0",
+    "vue-toast-notification": "^3.0.4",
+    "vuex": "^4.0.2",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
-    "@vue/cli-plugin-router": "~4.5.0",
-    "@vue/cli-plugin-vuex": "~4.5.0",
-    "@vue/cli-service": "~4.5.0",
+    "@intlify/vue-i18n-loader": "^3.0.0",
+    "@vue/cli-plugin-babel": "~4.5.15",
+    "@vue/cli-plugin-eslint": "~4.5.15",
+    "@vue/cli-service": "~4.5.15",
     "@vue/compiler-sfc": "^3.0.0",
-    "@vue/eslint-config-standard": "^5.1.2",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^7.0.0"
+    "eslint-plugin-vue": "^7.0.0",
+    "vue-cli-plugin-i18n": "~2.3.1"
   },
   "eslintConfig": {
     "root": true,
@@ -39,7 +60,7 @@
     },
     "extends": [
       "plugin:vue/vue3-essential",
-      "@vue/standard"
+      "eslint:recommended"
     ],
     "parserOptions": {
       "parser": "babel-eslint"

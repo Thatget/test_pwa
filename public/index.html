@@ -1,17 +1,57 @@
 <!DOCTYPE html>
 <html lang="">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title><%= htmlWebpackPlugin.options.title %></title>
-  </head>
-  <body>
+    <link rel="icon" href="<%= BASE_URL %>Favi-Icon.png">
+    <title>
+        Yanet: Professional FAQs
+    </title>
+    <meta name="description"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Playfair+Display" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Questrial" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Karla" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Montserrat" />
+    <!-- <script src="/path/to/tinymce.min.js"></script>
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'textarea',
+            language: 'sv',
+            language_url: '/js/sv.js',
+            plugins: 'myplugin',
+            external_plugins: {
+                'myplugin': '/js/myplugin/plugin.min.js'
+            },
+        });
+    </script> -->
+</head>
+
+<body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
+    <script type="text/javascript"> window.$crisp=[];window.CRISP_WEBSITE_ID="35cbcb5a-831c-47fb-9064-0bced009fca9";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();</script>
+
     <!-- built files will be auto injected -->
-  </body>
+    <script>
+        try {
+        var faq_yanet_domain = window.location.ancestorOrigins[0].slice(window.location.ancestorOrigins[0].indexOf('//')+ 2);
+        var faq_name = "[FAQ]" + faq_yanet_domain ;
+             $crisp.push(["set", "user:nickname", [faq_name]])
+            } catch(e) {}
+    </script>      
+</body>
+<style>
+    html,
+    body {
+        height: 100%;
+        background-color: #F6F6F7;
+    }
+    
+</style>
+
 </html>
